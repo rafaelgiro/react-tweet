@@ -1,8 +1,6 @@
 {
-  "name": "react-tweet",
-  "version": "3.0.4",
-  "repository": "https://github.com/vercel-labs/react-tweet.git",
-  "author": "Luis Alvarez (https://twitter.com/luis_fades)",
+  "name": "headless-react-tweet",
+  "version": "0.0.1",
   "scripts": {
     "build": "pnpm build:swc && pnpm types",
     "build:swc": "swc src -d dist --copy-files",
@@ -12,9 +10,6 @@
     "clean": "rm -rf dist && rm -rf .turbo"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vercel-labs/react-tweet/issues"
-  },
   "sideEffects": [
     "./dist/twitter-theme/tweet-container.js"
   ],

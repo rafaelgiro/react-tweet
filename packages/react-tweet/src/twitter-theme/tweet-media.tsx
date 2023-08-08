@@ -46,13 +46,7 @@ export const TweetMedia = ({ tweet, components }: Props) => {
         {tweet.mediaDetails?.map((media) => (
           <Fragment key={media.media_url_https}>
             {media.type === 'photo' ? (
-              <a
-                key={media.media_url_https}
-                href={tweet.url}
-                className={clsx(s.mediaContainer, s.mediaLink)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <>
                 <div
                   className={s.skeleton}
                   style={getSkeletonStyle(media, length)}
@@ -63,7 +57,7 @@ export const TweetMedia = ({ tweet, components }: Props) => {
                   className={s.image}
                   draggable
                 />
-              </a>
+              </>
             ) : (
               <div key={media.media_url_https} className={s.mediaContainer}>
                 <div
