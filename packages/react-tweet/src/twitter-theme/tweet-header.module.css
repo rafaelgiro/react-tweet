@@ -59,16 +59,7 @@
   overflow: hidden;
   white-space: nowrap;
 }
-.verifiedOld {
-  color: var(--tweet-verified-old-color);
-}
-.verifiedBlue {
-  color: var(--tweet-verified-blue-color);
-}
-.verifiedGovernment {
-  /* color: var(--tweet-verified-government-color); */
-  color: rgb(130, 154, 171);
-}
+
 .authorMeta {
   display: flex;
 }
@@ -97,8 +88,8 @@
 }
 
 .twitterIcon {
-  width: 25px;
-  height: 25px;
+  width: 23.75px;
+  height: 23.75px;
   color: var(--tweet-twitter-icon-color);
   fill: currentColor;
   user-select: none;

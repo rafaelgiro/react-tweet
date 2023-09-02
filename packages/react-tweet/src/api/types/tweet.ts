@@ -8,7 +8,7 @@ import type { TweetVideo } from './video.js'
 /**
  * Base tweet information shared by a tweet, a parent tweet and a quoted tweet.
  */
-interface TweetBase {
+export interface TweetBase {
   /**
    * Language code of the tweet. E.g "en", "es".
    */
@@ -80,6 +80,7 @@ export interface QuotedTweet extends TweetBase {
   reply_count: number
   retweet_count: number
   favorite_count: number
+  mediaDetails?: MediaDetails[]
   self_thread: {
     id_str: string
   }

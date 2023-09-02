@@ -1,6 +1,6 @@
 {
   "name": "headless-react-tweet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "build": "pnpm build:swc && pnpm types",
     "build:swc": "swc src -d dist --copy-files",

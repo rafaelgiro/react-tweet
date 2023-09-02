@@ -1,5 +1,7 @@
 import type {
+  TweetBase,
   Tweet,
+  QuotedTweet,
   MediaDetails,
   HashtagEntity,
   SymbolEntity,
@@ -16,23 +18,23 @@ export type TweetCoreProps = {
   onError?(error: any): any
 }
 
-const getTweetUrl = (tweet: Tweet) =>
+const getTweetUrl = (tweet: TweetBase) =>
   `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
 
-const getUserUrl = (usernameOrTweet: string | Tweet) =>
+const getUserUrl = (usernameOrTweet: string | TweetBase) =>
   `https://twitter.com/${
     typeof usernameOrTweet === 'string'
       ? usernameOrTweet
       : usernameOrTweet.user.screen_name
   }`
 
-const getLikeUrl = (tweet: Tweet) =>
+const getLikeUrl = (tweet: TweetBase) =>
   `https://twitter.com/intent/like?tweet_id=${tweet.id_str}`
 
-const getReplyUrl = (tweet: Tweet) =>
+const getReplyUrl = (tweet: TweetBase) =>
   `https://twitter.com/intent/tweet?in_reply_to=${tweet.id_str}`
 
-const getFollowUrl = (tweet: Tweet) =>
+const getFollowUrl = (tweet: TweetBase) =>
   `https://twitter.com/intent/follow?screen_name=${tweet.user.screen_name}`
 
 const getHashtagUrl = (hashtag: HashtagEntity) =>
@@ -46,7 +48,7 @@ const getInReplyToUrl = (tweet: Tweet) =>
 
 export const getMediaUrl = (
   media: MediaDetails,
-  size: 'small' | 'medium' | 'larget'
+  size: 'small' | 'medium' | 'large'
 ): string => {
   const url = new URL(media.media_url_https)
   const extension = url.pathname.split('.').pop()
@@ -112,7 +114,7 @@ type Entity = {
   | (SymbolEntity & { type: 'symbol'; href: string })
 )
 
-function getEntities(tweet: Tweet): Entity[] {
+function getEntities(tweet: TweetBase): Entity[] {
   const textMap = Array.from(tweet.text)
   const result: EntityWithType[] = [
     { indices: tweet.display_text_range, type: 'text' },
@@ -190,7 +192,7 @@ function addEntities(
  * Update display_text_range to work w/ Array.from
  * Array.from is unicode aware, unlike string.slice()
  */
-function fixRange(tweet: Tweet, entities: EntityWithType[]) {
+function fixRange(tweet: TweetBase, entities: EntityWithType[]) {
   if (
     tweet.entities.media &&
     tweet.entities.media[0].indices[0] < tweet.display_text_range[1]
@@ -203,7 +205,7 @@ function fixRange(tweet: Tweet, entities: EntityWithType[]) {
   }
 }
 
-export type EnrichedTweet = Omit<Tweet, 'entities'> & {
+export type EnrichedTweet = Omit<Tweet, 'entities' | 'quoted_tweet'> & {
   url: string
   user: {
     url: string
@@ -212,6 +214,12 @@ export type EnrichedTweet = Omit<Tweet, 'entities'> & {
   like_url: string
   reply_url: string
   in_reply_to_url?: string
+  entities: Entity[]
+  quoted_tweet?: EnrichedQuotedTweet
+}
+
+export type EnrichedQuotedTweet = Omit<QuotedTweet, 'entities'> & {
+  url: string
   entities: Entity[]
 }
 
@@ -232,4 +240,11 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
     ? getInReplyToUrl(tweet)
     : undefined,
   entities: getEntities(tweet),
+  quoted_tweet: tweet.quoted_tweet
+    ? {
+        ...tweet.quoted_tweet,
+        url: getTweetUrl(tweet.quoted_tweet),
+        entities: getEntities(tweet.quoted_tweet),
+      }
+    : undefined,
 })
