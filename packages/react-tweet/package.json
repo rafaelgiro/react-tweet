@@ -58,6 +58,8 @@
     "@swc/helpers": "^0.5.1",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
+    "photoswipe": "^5.4.0",
+    "react-photoswipe-gallery": "^2.2.7",
     "swr": "^2.2.0"
   },
   "devDependencies": {

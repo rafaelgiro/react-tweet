@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import { getTweet, type Tweet } from 'react-tweet/api'
-import { EmbeddedTweet, TweetSkeleton } from 'react-tweet'
+import { getTweet, type Tweet } from 'headless-react-tweet/api'
+import { EmbeddedTweet, TweetSkeleton } from 'headless-react-tweet'
 import { TweetPage } from '../../components/tweet-page'
 
 export async function getStaticProps({

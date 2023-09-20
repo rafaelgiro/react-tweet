@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "clsx": "^1.2.1",
-    "react-tweet": "workspace:*",
+    "headless-react-tweet": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",

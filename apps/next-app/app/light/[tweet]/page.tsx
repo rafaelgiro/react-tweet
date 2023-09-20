@@ -1,5 +1,5 @@
-import { Tweet } from 'react-tweet'
-import { getTweet } from 'react-tweet/api'
+import { Tweet } from 'headless-react-tweet'
+import { getTweet } from 'headless-react-tweet/api'
 import { components } from './tweet-components'
 
 type Props = {

@@ -18,7 +18,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-parallax-tilt": "^1.7.149",
-    "react-tweet": "workspace:*"
+    "headless-react-tweet": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
